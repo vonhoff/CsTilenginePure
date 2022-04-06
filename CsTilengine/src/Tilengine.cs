@@ -380,6 +380,7 @@ namespace Tilengine
         /// <summary>
         /// Pixel mapping for <see cref="TLN_SetLayerPixelMapping"/>
         /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
         public struct TLN_PixelMap
         {
             /// <summary>
@@ -396,6 +397,7 @@ namespace Tilengine
         /// <summary>
         /// Image tile for <see cref="TLN_CreateImageTileset"/>
         /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
         public struct TLN_TileImage
         {
             /// <summary>
@@ -417,6 +419,7 @@ namespace Tilengine
         /// <summary>
         /// Sprite state
         /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
         public struct TLN_SpriteState
         {
             /// <summary>
@@ -554,7 +557,12 @@ namespace Tilengine
             /// <summary>
             /// User provided blend function with <see cref="TLN_SetCustomBlendFunction"/>
             /// </summary>
-            BLEND_CUSTOM
+            BLEND_CUSTOM,
+
+            /// <summary>
+            /// Color averaging
+            /// </summary>
+            BLEND_MIX = BLEND_MIX50
         }
 
         /// <summary>
