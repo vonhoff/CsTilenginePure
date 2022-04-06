@@ -88,7 +88,7 @@ namespace Tilengine
         #region Structures
 
         /// <summary>
-        /// Affine transformation parameters.
+        /// Affine transformation parameters
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         public struct TLN_Affine
@@ -120,7 +120,7 @@ namespace Tilengine
         }
 
         /// <summary>
-        /// Tile item for Tilemap access functions.
+        /// Tile for Tilemap access functions
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         public struct TLN_Tile
@@ -139,7 +139,7 @@ namespace Tilengine
         }
 
         /// <summary>
-        /// Frame animation definition.
+        /// Frame animation definition
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         public struct TLN_SequenceFrame
@@ -378,7 +378,7 @@ namespace Tilengine
         }
 
         /// <summary>
-        /// Pixel mapping for <see cref="TLN_SetLayerPixelMapping"/>
+        /// Pixel map for <see cref="TLN_SetLayerPixelMapping"/>
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         public struct TLN_PixelMap
@@ -468,7 +468,7 @@ namespace Tilengine
             public bool enabled;
 
             /// <summary>
-            /// Pixel collision detection is enabled.
+            /// Whether pixel collision is enabled
             /// </summary>
             public bool collision;
         }
