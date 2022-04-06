@@ -2,7 +2,7 @@
 # CsTilengine
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## About CsTilengine
-CsTilengine is a C#/NET/Mono binding for Tilengine. This binding is a 1:1 API translation of the original C library. 
+This binding of Tilengine is an alternative version of [CsTilengine](https://github.com/megamarc/CsTilengine). It is a 1:1 API translation of the original C library.
 
 ## Contents
 * */CsTilengine/src* directory contains the single `Tilengine.cs` module with the binding itself
