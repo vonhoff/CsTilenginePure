@@ -1,8 +1,8 @@
 ![Tilengine logo](Tilengine.png)
-# CsTilengine
+# CsTilenginePure
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-## About CsTilengine
-This binding of Tilengine is an alternative version of [CsTilengine](https://github.com/megamarc/CsTilengine). It is a 1:1 API translation of the original C library.
+## About
+CsTilenginePure is an alternative version of [CsTilengine](https://github.com/megamarc/CsTilengine). It is a pure port of the C headers. The naming for this library will be exactly as it is in the C library, with little to no attention to the standard C# style. Everything will be as close to the C version as is technically possible.
 
 ## Contents
 * */CsTilengine/src* directory contains the single `Tilengine.cs` module with the binding itself
@@ -64,4 +64,4 @@ There's a `CsTilengine.sln` Visual Studio solution file. Open it, navigate to th
 Build a project and you'll get one executable ready to run.
 
 ## License
-CsTilengine is released under the permissive MIT license
+CsTilenginePure is released under the permissive MIT license
