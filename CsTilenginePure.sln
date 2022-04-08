@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsTilengine", "CsTilengine\CsTilengine.csproj", "{59C171B2-3FD8-4C9C-9D4B-FADB320E10BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsTilenginePure", "CsTilengine\CsTilenginePure.csproj", "{59C171B2-3FD8-4C9C-9D4B-FADB320E10BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{89D86FEA-0AB4-48F5-93CE-6D0B113A2656}"
 EndProject
