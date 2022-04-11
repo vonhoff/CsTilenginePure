@@ -40,7 +40,7 @@ namespace QueryLayer
                 return;
 
             // General info
-            Console.WriteLine("Layer {0} type: {1}", layerIndex, LayerTypes[(int)type]);
+            Console.WriteLine("\nLayer {0} type: {1}", layerIndex, LayerTypes[(int)type]);
             Console.WriteLine("  size: {0}x{1} pixels", TLN_GetLayerWidth(layerIndex), TLN_GetLayerHeight(layerIndex));
             Console.WriteLine("  Palette: {0}", TLN_GetLayerPalette(layerIndex));
 
