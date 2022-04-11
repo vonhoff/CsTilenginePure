@@ -303,7 +303,7 @@ namespace Tilengine
         }
 
         /// <summary>
-        /// Object item info returned by <see cref="TLN_GetObjectInfo"/>
+        /// Object item info returned by <see cref="TLN_GetListObject"/>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public struct TLN_ObjectInfo
