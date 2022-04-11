@@ -321,7 +321,7 @@ namespace Tilengine
             /// <summary>
             /// <see cref="TLN_TileFlags"/> Attributes
             /// </summary>
-            public ushort flags;
+            public TLN_TileFlags flags;
 
             /// <summary>
             /// Horizontal position
@@ -2156,7 +2156,7 @@ namespace Tilengine
         /// <returns>true if an item returned, false if no more items are left.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
-        public static extern bool TLN_GetListObject(IntPtr list, out TLN_ObjectInfo info);
+        public static extern bool TLN_GetListObject(IntPtr list, IntPtr info);
 
         /// <summary>
         /// Deletes object list.
