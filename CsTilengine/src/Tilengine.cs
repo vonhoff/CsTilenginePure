@@ -351,7 +351,7 @@ namespace Tilengine
             /// <summary>
             /// Object is visible
             /// </summary>
-            public bool visible;
+            public byte visible;
 
             /// <summary>
             /// Object name
@@ -481,7 +481,7 @@ namespace Tilengine
         /// Tile/sprite flags
         /// </summary>
         [Flags]
-        public enum TLN_TileFlags
+        public enum TLN_TileFlags : ushort
         {
             /// <summary>
             /// No flags

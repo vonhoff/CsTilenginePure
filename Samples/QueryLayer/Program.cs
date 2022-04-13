@@ -60,8 +60,17 @@ namespace QueryLayer
                     Console.WriteLine("  Objects: {0}", objectList);
                     Console.WriteLine("  num_objects = {0}", TLN_GetListNumObjects(objectList));
 
+                    // Gets the size of TLN_ObjectInfo.
+                    var typeSize = Marshal.SizeOf<TLN_ObjectInfo>();
+
                     // Initialize unmanaged memory to hold the struct.
-                    var infoPtr = Marshal.AllocHGlobal(Marshal.SizeOf<TLN_ObjectInfo>());
+                    var infoPtr = Marshal.AllocHGlobal(typeSize);
+
+                    // Zero out memory allocated by Marshal.AllocHGlobal.
+                    for (var i = 0; i < typeSize; i++)
+                    {
+                        Marshal.WriteByte(infoPtr, i, 0x00);
+                    }
 
                     // Iterate objects and get info on each with TLN_GetListObject()
                     var hasObject = TLN_GetListObject(objectList, infoPtr);
