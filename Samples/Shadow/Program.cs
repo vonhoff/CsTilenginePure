@@ -2,7 +2,7 @@
 
 namespace Shadow
 {
-    public class Program
+    public static class Program
     {
         private const int BackgroundLayer = 1;
         private const int ForegroundLayer = 0;
@@ -102,7 +102,7 @@ namespace Shadow
         /// </summary>
         private static byte Lerp(int x, int x0, int x1, int fx0, int fx1)
         {
-            return (byte)(fx0 + (fx1 - fx0) * (x - x0) / (x1 - x0));
+            return (byte)(fx0 + ((fx1 - fx0) * (x - x0) / (x1 - x0)));
         }
 
         private static void RasterCallback(int line)

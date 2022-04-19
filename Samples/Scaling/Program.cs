@@ -6,7 +6,6 @@ namespace Scaling
     {
         private const int BackgroundLayer = 1;
         private const int ForegroundLayer = 0;
-        private const int MaxPalette = 8;
         private const int Width = 400;
         private const int Height = 240;
         private const int MinScale = 50;
@@ -22,7 +21,7 @@ namespace Scaling
         private static int _ypos;
         private static int _scale;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             // Initialize Tilengine
             TLN_Init(Width, Height, 2, 0, 0);
@@ -68,12 +67,12 @@ namespace Scaling
 
                 if (TLN_GetInput(TLN_Input.INPUT_A) && _scale < MaxScale)
                 {
-                    _scale += 1;
+                    _scale++;
                 }
 
                 if (TLN_GetInput(TLN_Input.INPUT_B) && _scale > MinScale)
                 {
-                    _scale -= 1;
+                    _scale--;
                 }
 
                 var foregroundScale = _scale / 100.0f;
@@ -103,7 +102,7 @@ namespace Scaling
         /// </summary>
         private static float Lerp(float x, float x0, float x1, float fx0, float fx1)
         {
-            return fx0 + (fx1 - fx0) * (x - x0) / (x1 - x0);
+            return fx0 + ((fx1 - fx0) * (x - x0) / (x1 - x0));
         }
 
         private static void RasterCallback(int line)

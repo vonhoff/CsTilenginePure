@@ -1,6 +1,6 @@
 ﻿#region License
 
-/* CsTilengine - 1:1 Api C# Wrapper for Tilengine v2.9.5
+/* CsTilenginePure - 1:1 Api C# Wrapper for Tilengine
  * Copyright (C) 2022 Simon Vonhoff <mailto:simon.vonhoff@outlook.com>
  *
  * Tilengine - The 2D retro graphics engine with raster effects
@@ -46,42 +46,9 @@ namespace Tilengine
 {
     public static class TLN
     {
-        #region CsTilengine
+        #region CsTilenginePure
 
         private const string NativeLibName = "Tilengine";
-
-        /// <summary>
-        /// Retrieve a message about the last error that occurred.
-        /// </summary>
-        /// <returns>
-        /// Returns a message with information about the specific error that occurred,
-        /// or an empty string if there hasn't been an error message.
-        /// </returns>
-        public static string TLN_GetError()
-        {
-            var lastError = TLN_GetLastError();
-
-            // If there is no error, return an empty string.
-            if (lastError == TLN_Error.TLN_ERR_OK)
-            {
-                return string.Empty;
-            }
-
-            // Get the pointer to the error message.
-            var descriptionPointer = TLN_GetErrorString(lastError);
-
-            // Convert the pointer to a string.
-            var description = Marshal.PtrToStringAnsi(descriptionPointer);
-            if (string.IsNullOrEmpty(description))
-            {
-                description = "Unknown error.";
-            }
-
-            // Free the unmanaged memory.
-            Marshal.FreeHGlobal(descriptionPointer);
-
-            return description;
-        }
 
         #endregion
 
@@ -303,7 +270,7 @@ namespace Tilengine
         }
 
         /// <summary>
-        /// Object item info returned by <see cref="TLN_GetObjectInfo"/>
+        /// Object item info returned by <see cref="TLN_GetListObject"/>
         /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public struct TLN_ObjectInfo
@@ -321,7 +288,7 @@ namespace Tilengine
             /// <summary>
             /// <see cref="TLN_TileFlags"/> Attributes
             /// </summary>
-            public ushort flags;
+            public TLN_TileFlags flags;
 
             /// <summary>
             /// Horizontal position
@@ -351,7 +318,7 @@ namespace Tilengine
             /// <summary>
             /// Object is visible
             /// </summary>
-            public bool visible;
+            public byte visible;
 
             /// <summary>
             /// Object name
@@ -481,7 +448,7 @@ namespace Tilengine
         /// Tile/sprite flags
         /// </summary>
         [Flags]
-        public enum TLN_TileFlags
+        public enum TLN_TileFlags : ushort
         {
             /// <summary>
             /// No flags
@@ -1244,14 +1211,47 @@ namespace Tilengine
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern TLN_Error TLN_GetLastError();
 
+        [DllImport(NativeLibName, EntryPoint = "TLN_GetErrorString", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr INTERNAL_TLN_GetErrorString(TLN_Error error);
+
         /// <summary>
-        /// Returns a <b>pointer</b> to the description of the specified error code. <br/>
-        /// Use <see cref="TLN_GetError"/> to get the string value of the last error that occured.
+        /// Returns the description of the specified error code.
         /// </summary>
         /// <param name="error">Error code to get the description from.</param>
         /// <returns>A pointer to a description of an error from <see cref="TLN_Error"/>.</returns>
-        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr TLN_GetErrorString(TLN_Error error);
+        public static string TLN_GetErrorString(TLN_Error error)
+        {
+            var errorPtr = INTERNAL_TLN_GetErrorString(error);
+            var message = Marshal.PtrToStringAnsi(errorPtr);
+            return string.IsNullOrEmpty(message) ? string.Empty : message;
+        }
+
+        /// <summary>
+        /// Retrieve a message about the last error that occurred.
+        /// </summary>
+        /// <returns>
+        /// Returns a message with information about the specific error that occurred,
+        /// or an empty string if there hasn't been an error message.
+        /// </returns>
+        public static string TLN_GetError()
+        {
+            var lastError = TLN_GetLastError();
+
+            // If there is no error, return an empty string.
+            if (lastError == TLN_Error.TLN_ERR_OK)
+            {
+                return string.Empty;
+            }
+
+            // Get the pointer to the error message.
+            var description = TLN_GetErrorString(lastError);
+            if (string.IsNullOrEmpty(description))
+            {
+                description = "Unknown error.";
+            }
+
+            return description;
+        }
 
         #endregion
 
@@ -2099,6 +2099,45 @@ namespace Tilengine
         #region Objects
 
         /// <summary>
+        /// Creates an array of <see cref="TLN_ObjectInfo"/> structures from an object list pointer.
+        /// </summary>
+        /// <param name="listPtr">A TLN_ObjectList pointer</param>
+        /// <returns>An array of <see cref="TLN_ObjectInfo"/> structures.</returns>
+        public static TLN_ObjectInfo[] TLN_GetObjectArray(IntPtr listPtr)
+        {
+            var numObjects = TLN_GetListNumObjects(listPtr);
+            if (numObjects == 0)
+            {
+                return Array.Empty<TLN_ObjectInfo>();
+            }
+
+            var objectArray = new TLN_ObjectInfo[numObjects];
+            var typeSize = Marshal.SizeOf<TLN_ObjectInfo>();
+
+            // Initialize unmanaged memory to hold a TLN_ObjectInfo struct.
+            var infoPtr = Marshal.AllocHGlobal(typeSize);
+
+            // Zero out memory allocated by Marshal.AllocHGlobal.
+            int i;
+            for (i = 0; i < typeSize; i++)
+            {
+                Marshal.WriteByte(infoPtr, i, 0x00);
+            }
+
+            // Iterate objects and get info on each with TLN_GetListObject()
+            i = 0;
+            var hasObject = TLN_GetListObject(listPtr, infoPtr);
+            while (hasObject)
+            {
+                objectArray[i++] = Marshal.PtrToStructure<TLN_ObjectInfo>(infoPtr);
+                hasObject = TLN_GetListObject(listPtr, IntPtr.Zero);
+            }
+
+            Marshal.FreeHGlobal(infoPtr);
+            return objectArray;
+        }
+
+        /// <summary>
         /// Creates a TLN_ObjectList.
         /// </summary>
         /// <remarks>
@@ -2156,7 +2195,7 @@ namespace Tilengine
         /// <returns>true if an item returned, false if no more items are left.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
-        public static extern bool TLN_GetListObject(IntPtr list, out TLN_ObjectInfo info);
+        public static extern bool TLN_GetListObject(IntPtr list, IntPtr info);
 
         /// <summary>
         /// Deletes object list.

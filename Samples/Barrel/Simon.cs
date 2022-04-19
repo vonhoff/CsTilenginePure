@@ -124,7 +124,7 @@ namespace Barrel
             else
             {
                 // Set the character to airborne state if he is falling.
-                _velocity.Y += (MoveSpeed * 2) * deltaTime;
+                _velocity.Y += MoveSpeed * 2 * deltaTime;
 
                 if (_state != State.Airborne)
                 {

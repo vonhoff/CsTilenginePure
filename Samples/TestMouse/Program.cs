@@ -3,7 +3,7 @@ using static Tilengine.TLN;
 
 namespace TestMouse
 {
-    public class Program
+    public static class Program
     {
         private const int Width = 400;
         private const int Height = 240;
