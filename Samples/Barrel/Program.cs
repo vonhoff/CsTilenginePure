@@ -16,7 +16,7 @@ using static Tilengine.TLN;
 
 namespace Barrel
 {
-    public class Program
+    public static class Program
     {
         private const int BackgroundLayer = 1;
         private const int ForegroundLayer = 0;
@@ -70,7 +70,7 @@ namespace Barrel
                 // Update time
                 SDL_Delay(8);
                 var now = SDL_GetPerformanceCounter();
-                var deltaTime = (float)((now - lastTime) / (float)SDL_GetPerformanceFrequency());
+                var deltaTime = (now - lastTime) / (float)SDL_GetPerformanceFrequency();
                 lastTime = now;
 
                 // Input
@@ -97,7 +97,7 @@ namespace Barrel
         /// </summary>
         private static float Lerp(float x, float x0, float x1, float fx0, float fx1)
         {
-            return fx0 + (fx1 - fx0) * (x - x0) / (x1 - x0);
+            return fx0 + ((fx1 - fx0) * (x - x0) / (x1 - x0));
         }
 
         /// <summary>
@@ -107,8 +107,7 @@ namespace Barrel
         private static void RasterCallback(int line)
         {
             var angle = Lerp(line, 0, Height - 1, 0, MathF.PI);
-            var factor = (1 - MathF.Sin(angle)) * 0.4f + 1;
-            _transform.sx = factor;
+            _transform.sx = ((1 - MathF.Sin(angle)) * 0.4f) + 1;
 
             TLN_SetLayerAffineTransform(BackgroundLayer, _transform);
 

@@ -15,7 +15,7 @@ using static Tilengine.TLN;
 
 namespace Forest
 {
-    public class Program
+    public static class Program
     {
         private const string ResourceFilename = "assets.dat";
         private const int Width = 424;

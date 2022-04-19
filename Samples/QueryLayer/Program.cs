@@ -1,9 +1,8 @@
-﻿using System.Runtime.InteropServices;
-using static Tilengine.TLN;
+﻿using static Tilengine.TLN;
 
 namespace QueryLayer
 {
-    public class Program
+    public static class Program
     {
         private const int Width = 424;
         private const int Height = 240;
@@ -17,7 +16,7 @@ namespace QueryLayer
             TLN_LoadWorld("map.tmx", 0);
 
             // Retrieve info about the layers.
-            for (var c = 0; c < LayerAmount; c += 1)
+            for (var c = 0; c < LayerAmount; ++c)
             {
                 ShowLayerInfo(c);
             }
@@ -37,7 +36,9 @@ namespace QueryLayer
         {
             var type = TLN_GetLayerType(layerIndex);
             if (type == TLN_LayerType.LAYER_NONE)
+            {
                 return;
+            }
 
             // General info
             Console.WriteLine("\nLayer {0} type: {1}", layerIndex, LayerTypes[(int)type]);
@@ -55,35 +56,17 @@ namespace QueryLayer
                     break;
 
                 case TLN_LayerType.LAYER_OBJECT:
-                    var objectList = TLN_GetLayerObjects(layerIndex);
+                    var listPtr = TLN_GetLayerObjects(layerIndex);
                     Console.WriteLine("  Tileset: {0}", TLN_GetLayerTileset(layerIndex));
-                    Console.WriteLine("  Objects: {0}", objectList);
-                    Console.WriteLine("  num_objects = {0}", TLN_GetListNumObjects(objectList));
+                    Console.WriteLine("  Objects: {0}", listPtr);
+                    Console.WriteLine("  num_objects = {0}", TLN_GetListNumObjects(listPtr));
 
-                    // Gets the size of TLN_ObjectInfo.
-                    var typeSize = Marshal.SizeOf<TLN_ObjectInfo>();
-
-                    // Initialize unmanaged memory to hold the struct.
-                    var infoPtr = Marshal.AllocHGlobal(typeSize);
-
-                    // Zero out memory allocated by Marshal.AllocHGlobal.
-                    for (var i = 0; i < typeSize; i++)
+                    foreach (var info in TLN_GetObjectArray(listPtr))
                     {
-                        Marshal.WriteByte(infoPtr, i, 0x00);
-                    }
-
-                    // Iterate objects and get info on each with TLN_GetListObject()
-                    var hasObject = TLN_GetListObject(objectList, infoPtr);
-                    while (hasObject)
-                    {
-                        var info = Marshal.PtrToStructure<TLN_ObjectInfo>(infoPtr);
                         Console.WriteLine("    id:{0} gid:{1} name:\"{2}\" pos:({3},{4}) size:({5}x{6}) type:{7}",
                             info.id, info.gid, info.name, info.x, info.y, info.width, info.height, info.type);
-                        hasObject = TLN_GetListObject(objectList, IntPtr.Zero);
                     }
 
-                    // Free the unmanaged memory.
-                    Marshal.FreeHGlobal(infoPtr);
                     break;
 
                 case TLN_LayerType.LAYER_BITMAP:

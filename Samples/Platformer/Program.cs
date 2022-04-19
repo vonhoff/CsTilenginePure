@@ -16,7 +16,7 @@ using static Tilengine.TLN;
 
 namespace Platformer
 {
-    public class Program
+    public static class Program
     {
         private const int BackgroundLayer = 1;
         private const int ForegroundLayer = 0;
@@ -137,7 +137,7 @@ namespace Platformer
         /// </summary>
         private static float Lerp(float x, float x0, float x1, float fx0, float fx1)
         {
-            return fx0 + (fx1 - fx0) * (x - x0) / (x1 - x0);
+            return fx0 + ((fx1 - fx0) * (x - x0) / (x1 - x0));
         }
 
         private static void RasterCallback(int line)

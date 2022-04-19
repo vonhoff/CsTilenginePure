@@ -17,7 +17,7 @@ using static Tilengine.TLN;
 
 namespace Mode7
 {
-    public class Program
+    public static class Program
     {
         private const int BackgroundLayer = 1;
         private const int ForegroundLayer = 0;
@@ -31,7 +31,7 @@ namespace Mode7
         private static IntPtr _road;
         private static float _speed;
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             // Initialize Tilengine
             TLN_Init(Width, Height, 2, 0, 0);
@@ -157,7 +157,7 @@ namespace Mode7
         /// </summary>
         private static float Lerp(float x, float x0, float x1, float fx0, float fx1)
         {
-            return fx0 + (fx1 - fx0) * (x - x0) / (x1 - x0);
+            return fx0 + ((fx1 - fx0) * (x - x0) / (x1 - x0));
         }
 
         /// <summary>
