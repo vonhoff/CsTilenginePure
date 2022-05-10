@@ -1,5 +1,3 @@
-<img src="Logo.png" alt="CsTilenginePure Logo"/>
-
 # CsTilenginePure
 A pure port of the C headers in [Tilengine](https://github.com/megamarc/Tilengine). The naming of the library is identical to that of the C library, with little to no consideration for the appropriate C# style. Everything is as close to the C version as is technically possible.
 
