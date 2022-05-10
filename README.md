@@ -1,7 +1,7 @@
 <img src="Logo.png" alt="CsTilenginePure Logo" height="150px"/>
 
 # CsTilenginePure
-A pure port of the C headers in [Tilengine](https://github.com/megamarc/Tilengine). The naming of the library is identical to that of the C library, with little to no consideration for the appropriate C# style. Everything is close to the C version as is technically possible.
+A pure port of the C headers in [Tilengine](https://github.com/megamarc/Tilengine). The naming of the library is identical to that of the C library, with little to no consideration for the appropriate C# style. Everything is as close to the C version as is technically possible.
 
 ## Contents
 * */CsTilengine/src* directory contains the single `Tilengine.cs` module with the binding itself
@@ -63,4 +63,4 @@ There's a `CsTilengine.sln` Visual Studio solution file. Open it, navigate to th
 Build a project and you'll get one executable ready to run.
 
 ## License
-CsTilenginePure is released under the permissive MIT license
+CsTilenginePure is released under the permissive MIT license.
