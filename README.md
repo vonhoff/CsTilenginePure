@@ -1,13 +1,7 @@
-<h3 align="center">
-  <a href="https://github.com/vonhoff/CsTilenginePure">
-    <img src="Logo.png" alt="CsTilenginePure Logo" />
-  </a>
-</h3>
+<img src="Logo.png" alt="CsTilenginePure Logo" height="150px"/>
 
 # CsTilenginePure
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-CsTilenginePure is a pure port of the C headers of Tilengine. The naming in this library is exactly as it is in the C library, with little to no attention paid to the standard C# style. Everything is as close to the C version as is technically possible.
+A pure port of the C headers in [Tilengine](https://github.com/megamarc/Tilengine). The naming of the library is identical to that of the C library, with little to no consideration for the appropriate C# style. Everything is close to the C version as is technically possible.
 
 ## Contents
 * */CsTilengine/src* directory contains the single `Tilengine.cs` module with the binding itself
