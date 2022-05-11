@@ -1,5 +1,5 @@
 # CsTilenginePure
-A pure port of the C headers in [Tilengine](https://github.com/megamarc/Tilengine). The naming of the library is identical to that of the C library, with little to no consideration for the appropriate C# style. Everything is as close to the C version as is technically possible.
+CsTilenginePure is a pure port of the C headers in [Tilengine](https://github.com/megamarc/Tilengine). The naming of the library is identical to that of the C library, with little to no consideration for the appropriate C# style. Everything is as close to the C version as is technically possible.
 
 ## Contents
 * */CsTilengine/src* directory contains the single `Tilengine.cs` module with the binding itself
