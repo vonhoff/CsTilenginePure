@@ -937,7 +937,7 @@ namespace Tilengine
         /// Deletes explicit context.
         /// </summary>
         /// <param name="context">Reference to the context.</param>
-        /// <returns>true if successful or false if an invalid context is supplied.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an invalid context is supplied.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeleteContext(IntPtr context);
@@ -946,7 +946,7 @@ namespace Tilengine
         /// Sets current engine context.
         /// </summary>
         /// <param name="context">TLN_Engine object reference to set as current context, returned by TLN_Init().</param>
-        /// <returns>true if successful or false if an invalid context reference is supplied.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an invalid context reference is supplied.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetContext(IntPtr context);
@@ -1046,7 +1046,7 @@ namespace Tilengine
         /// Sets the background color from a tilemap defined color.
         /// </summary>
         /// <param name="tilemap">Reference to the tilemap with the background color to set.</param>
-        /// <returns>true if successful or false if an invalid tilemap reference was supplied.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an invalid tilemap reference was supplied.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetBGColorFromTilemap(IntPtr tilemap);
@@ -1066,7 +1066,7 @@ namespace Tilengine
         /// Unlike tilemaps or sprites, this bitmap cannot be moved and has no transparency.
         /// </summary>
         /// <param name="bitmap">Reference to bitmap for the background. Set to <see cref="IntPtr.Zero"/> to disable.</param>
-        /// <returns>true if successful or false if an invalid bitmap reference was supplied.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an invalid bitmap reference was supplied.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetBGBitmap(IntPtr bitmap);
@@ -1075,7 +1075,7 @@ namespace Tilengine
         /// Changes the palette for the background bitmap.
         /// </summary>
         /// <param name="palette">Reference to palette.</param>
-        /// <returns>true if successful or false if an invalid palette reference was supplied.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an invalid palette reference was supplied.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetBGPalette(IntPtr palette);
@@ -1135,7 +1135,7 @@ namespace Tilengine
         /// <summary>
         /// Sets base path for TLN_Load functions.
         /// </summary>
-        /// <param name="path">Base path. Files will load at path/filename. Can be NULL.</param>
+        /// <param name="path">Base path. Files will load at path/filename. Can be <see langword="null"/>.</param>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void TLN_SetLoadPath(string? path);
 
@@ -1168,7 +1168,7 @@ namespace Tilengine
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         When the package is opened, it's globally bind to all TLN_LoadXXX functions. <br/>
+        ///         When the package is opened, it is globally bind to all TLN_LoadXXX functions. <br/>
         ///         The assets inside the package are indexed with their original path/file as
         ///         when they were plain files.
         ///     </para>
@@ -1180,8 +1180,8 @@ namespace Tilengine
         ///     </para>
         /// </remarks>
         /// <param name="filename">File with the resource package (.dat extension)</param>
-        /// <param name="key">Optional null-terminated ASCII string with aes decryption key. Can be NULL.</param>
-        /// <returns>true if the package was opened and made current, or false if an error occurred.</returns>
+        /// <param name="key">Optional null-terminated ASCII string with aes decryption key. Can be <see langword="null"/>.</param>
+        /// <returns><see langword="true"/> if the package was opened and made current, or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_OpenResourcePack(string filename, string? key);
@@ -1218,7 +1218,7 @@ namespace Tilengine
         /// Returns the description of the specified error code.
         /// </summary>
         /// <param name="error">Error code to get the description from.</param>
-        /// <returns>A pointer to a description of an error from <see cref="TLN_Error"/>.</returns>
+        /// <returns>A description of an error from <see cref="TLN_Error"/>.</returns>
         public static string TLN_GetErrorString(TLN_Error error)
         {
             var errorPtr = INTERNAL_TLN_GetErrorString(error);
@@ -1274,7 +1274,7 @@ namespace Tilengine
         /// Mask of the possible creation flags: <br/>
         /// CWF_FULLSCREEN, CWF_VSYNC, CWF_S1 - CWF_S5 (scaling factor, none = auto max)
         /// </param>
-        /// <returns>true if the window was created or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if the window was created or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_CreateWindow(string? overlay, TLN_CreateWindowFlags flags);
@@ -1296,7 +1296,7 @@ namespace Tilengine
         /// Mask of the possible creation flags: <br/>
         /// CWF_FULLSCREEN, CWF_VSYNC, CWF_S1 - CWF_S5 (scaling factor, none = auto max)
         /// </param>
-        /// <returns>true if the window was created or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if the window was created or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_CreateWindowThread(string overlay, TLN_CreateWindowFlags flags);
@@ -1322,7 +1322,7 @@ namespace Tilengine
         ///     </para>
         /// </remarks>
         /// <returns>
-        /// true if window is active or false if the user has requested to end the application. <br/>
+        /// <see langword="true"/> if window is active or <see langword="false"/> if the user has requested to end the application. <br/>
         /// (by pressing Esc key or clicking the close button)
         /// </returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
@@ -1333,7 +1333,7 @@ namespace Tilengine
         /// Gets window state.
         /// </summary>
         /// <returns>
-        /// true if window is active or false if the user has requested to end the application. <br/>
+        /// <see langword="true"/> if window is active or <see langword="false"/> if the user has requested to end the application. <br/>
         /// (by pressing Esc key or clicking the close button)
         /// </returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
@@ -1358,7 +1358,7 @@ namespace Tilengine
         /// Input to check state. It should be an attribute from <see cref="TLN_Input"/><br/>
         /// Combine this with INPUT_P1 to INPUT_P4 to request input from a specific player.
         /// </param>
-        /// <returns>true if the provided input is pressed, otherwise false.</returns>
+        /// <returns><see langword="true"/> if the provided input is pressed, otherwise false.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetInput(TLN_Input id);
@@ -1367,7 +1367,7 @@ namespace Tilengine
         /// Enables or disables input for a specific player.
         /// </summary>
         /// <param name="player">Player number to toggle (PLAYER1 - PLAYER4)</param>
-        /// <param name="enable">Set true to enable, false to disable.</param>
+        /// <param name="enable"><see langword="true"/> to enable, <see langword="false"/> to disable.</param>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void TLN_EnableInput(TLN_Player player, bool enable);
 
@@ -1568,7 +1568,7 @@ namespace Tilengine
         /// Pointer to application-allocated <see cref="TLN_SpriteInfo"/>
         /// structure that will receive the data.
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetSpriteInfo(IntPtr spriteset, int entry, out TLN_SpriteInfo info);
@@ -1608,7 +1608,7 @@ namespace Tilengine
         /// </param>
         /// <param name="pixels">Pointer to source pixel data.</param>
         /// <param name="pitch">Number of bytes for each scanline of the source pixel data.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpritesetData(IntPtr spriteset, int entry, TLN_SpriteData[] data, IntPtr pixels, int pitch);
@@ -1620,7 +1620,7 @@ namespace Tilengine
         /// <b>Don't delete a spriteset which is attached to a sprite.</b>
         /// </remarks>
         /// <param name="Spriteset">Reference to the spriteset.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeleteSpriteset(IntPtr spriteset);
@@ -1638,10 +1638,10 @@ namespace Tilengine
         /// <param name="palette">Reference to the palette to assign</param>
         /// <param name="sp">
         /// Optional reference to the optional sequence pack with
-        /// associated tileset animations. Can be NULL.
+        /// associated tileset animations. Can be <see langword="null"/>.
         /// </param>
         /// <param name="attributes">
-        /// Optional array of attributes, one for each tile. Can be NULL.
+        /// Optional array of attributes, one for each tile. Can be <see langword="null"/>.
         /// </param>
         /// <returns>Reference to the created tileset, or <see cref="IntPtr.Zero"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
@@ -1651,7 +1651,7 @@ namespace Tilengine
         /// Creates a multiple image-based tileset.
         /// </summary>
         /// <param name="numtiles">Number of tiles that the tileset will hold.</param>
-        /// <param name="images">Array of image structures, one for each tile. Can be NULL.</param>
+        /// <param name="images">Array of image structures, one for each tile. Can be <see langword="null"/>.</param>
         /// <returns>Reference to the created tileset, or <see cref="IntPtr.Zero"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TLN_CreateImageTileset(int numtiles, TLN_TileImage[]? images);
@@ -1682,7 +1682,7 @@ namespace Tilengine
         /// <param name="entry">Number of tile to set [0, num_tiles - 1]</param>
         /// <param name="srcdata">Pointer to pixel data to set</param>
         /// <param name="srcpitch">Bytes per line of source data</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetTilesetPixels(IntPtr tileset, int entry, byte[] srcdata, int srcpitch);
@@ -1756,7 +1756,7 @@ namespace Tilengine
         /// <param name="cols">Number of cols (horizontal dimension)</param>
         /// <param name="tiles">Array of tiles with data (see struct <see cref="TLN_Tile"/>)</param>
         /// <param name="bgcolor">Background color value (RGB32 packed)</param>
-        /// <param name="tileset">Optional reference to associated tileset. Can be NULL.</param>
+        /// <param name="tileset">Optional reference to associated tileset. Can be <see langword="null"/>.</param>
         /// <returns>Reference to the created tilemap, or <see cref="IntPtr.Zero"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TLN_CreateTilemap(int rows, int cols, TLN_Tile[] tiles, uint bgcolor, IntPtr tileset);
@@ -1765,7 +1765,7 @@ namespace Tilengine
         /// Loads a tilemap layer from a Tiled .tmx file.
         /// </summary>
         /// <param name="filename">TMX file with the tilemap.</param>
-        /// <param name="layername">Optional name of the layer inside the tmx file to load. Set to NULL to load the first layer.</param>
+        /// <param name="layername">Optional name of the layer inside the tmx file to load. Set to <see langword="null"/> to load the first layer.</param>
         /// <returns>Reference to the newly loaded tilemap, or <see cref="IntPtr.Zero"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern IntPtr TLN_LoadTilemap(string filename, string? layername);
@@ -1809,7 +1809,7 @@ namespace Tilengine
         /// <param name="row">Vertical location of the tile.</param>
         /// <param name="col">Horizontal location of the tile.</param>
         /// <param name="tile">Reference to an application allocated <see cref="TLN_Tile"/> which will contain the data.</param>
-        /// <returns>true if successful or false if an invalid tilemap reference was supplied.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an invalid tilemap reference was supplied.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetTilemapTile(IntPtr tilemap, int row, int col, out TLN_Tile tile);
@@ -1820,8 +1820,8 @@ namespace Tilengine
         /// <param name="tilemap">Reference to the tilemap.</param>
         /// <param name="row">Row (vertical position) of the tile [0 - num_rows - 1]</param>
         /// <param name="col">Column (horizontal position) of the tile [0 - num_cols - 1]</param>
-        /// <param name="tile">Reference to the tile to set, or NULL to set an empty tile.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <param name="tile">Reference to the tile to set, or <see langword="null"/> to set an empty tile.</param>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetTilemapTile(IntPtr tilemap, int row, int col, in TLN_Tile tile);
@@ -1840,7 +1840,7 @@ namespace Tilengine
         /// <param name="dst">Reference to the target tilemap.</param>
         /// <param name="dstrow">Starting row (vertical position) inside the target tilemap.</param>
         /// <param name="dstcol">Starting column (horizontal position) inside the target tilemap.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_CopyTiles(IntPtr src, int srcrow, int srccol, int rows, int cols, IntPtr dst, int dstrow, int dstcol);
@@ -1852,7 +1852,7 @@ namespace Tilengine
         /// <b>Don't delete a tilemap which is attached to a layer.</b>
         /// </remarks>
         /// <param name="tilemap">Reference to the tilemap.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeleteTilemap(IntPtr tilemap);
@@ -1893,7 +1893,7 @@ namespace Tilengine
         /// <param name="r">Red component of the color (0-255)</param>
         /// <param name="g">Green component of the color (0-255)</param>
         /// <param name="b">Blue component of the color (0-255)</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetPaletteColor(IntPtr palette, int color, byte r, byte g, byte b);
@@ -1921,7 +1921,7 @@ namespace Tilengine
         ///         </item>
         ///     </list>
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_MixPalettes(IntPtr src1, IntPtr src2, IntPtr dst, byte factor);
@@ -1936,7 +1936,7 @@ namespace Tilengine
         /// <param name="b">Blue component of the color (0-255)</param>
         /// <param name="start">Index of the first color entry to modify.</param>
         /// <param name="num">Number of colors from start to modify.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_AddPaletteColor(IntPtr palette, byte r, byte g, byte b, byte start, byte num);
@@ -1951,7 +1951,7 @@ namespace Tilengine
         /// <param name="b">Blue component of the color (0-255)</param>
         /// <param name="start">Index of the first color entry to modify.</param>
         /// <param name="num">Number of colors from start to modify</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SubPaletteColor(IntPtr palette, byte r, byte g, byte b, byte start, byte num);
@@ -1966,7 +1966,7 @@ namespace Tilengine
         /// <param name="b">Blue component of the color (0-255)</param>
         /// <param name="start">Index of the first color entry to modify.</param>
         /// <param name="num">Number of colors from start to modify.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_ModPaletteColor(IntPtr palette, byte r, byte g, byte b, byte start, byte num);
@@ -1987,7 +1987,7 @@ namespace Tilengine
         /// <b>Don't delete a palette which is attached to a layer or sprite.</b>
         /// </remarks>
         /// <param name="palette">Reference to the palette.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeletePalette(IntPtr palette);
@@ -2080,7 +2080,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="bitmap">Reference to the bitmap.</param>
         /// <param name="palette">Reference to the palette.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetBitmapPalette(IntPtr bitmap, IntPtr palette);
@@ -2089,7 +2089,7 @@ namespace Tilengine
         /// Deletes bitmap and frees up resources.
         /// </summary>
         /// <param name="bitmap">Reference to the bitmap.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeleteBitmap(IntPtr bitmap);
@@ -2157,7 +2157,7 @@ namespace Tilengine
         /// <param name="flags">Member or combination of <see cref="TLN_TileFlags"/></param>
         /// <param name="x">Layer-space horizontal coordinate of the top-left corner.</param>
         /// <param name="y">Layer-space vertical coordinate of the top-left corner.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_AddTileObjectToList(IntPtr list, ushort id, ushort gid, TLN_TileFlags flags, int x, int y);
@@ -2192,7 +2192,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="list">Reference to TLN_ObjectList to get items.</param>
         /// <param name="info">Pointer to user-allocated TLN_ObjectInfo struct</param>
-        /// <returns>true if an item returned, false if no more items are left.</returns>
+        /// <returns><see langword="true"/> if an item returned, <see langword="false"/> if no more items are left.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetListObject(IntPtr list, IntPtr info);
@@ -2201,7 +2201,7 @@ namespace Tilengine
         /// Deletes object list.
         /// </summary>
         /// <param name="list">Reference to the object list.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeleteObjectList(IntPtr list);
@@ -2221,10 +2221,10 @@ namespace Tilengine
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="tileset">
         /// Optional reference to the tileset to assign. If the tilemap has a reference to its own tileset,
-        /// passing NULL will assign the default tileset.
+        /// passing <see langword="null"/> will assign the default tileset.
         /// </param>
         /// <param name="tilemap">Reference to the tilemap to assign.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayer(int nlayer, IntPtr tileset, IntPtr tilemap);
@@ -2234,7 +2234,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="tilemap">Reference to the tilemap to assign.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerTilemap(int nlayer, IntPtr tilemap);
@@ -2244,7 +2244,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="bitmap"> Reference to the bitmap to assign.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerBitmap(int nlayer, IntPtr bitmap);
@@ -2267,7 +2267,7 @@ namespace Tilengine
         /// </remarks>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="palette">Reference to the palette to assign to the layer.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerPalette(int nlayer, IntPtr palette);
@@ -2293,7 +2293,7 @@ namespace Tilengine
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="hstart">Horizontal offset in the tileset on the left side.</param>
         /// <param name="vstart">Vertical offset in the tileset on the top side.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerPosition(int nlayer, int hstart, int vstart);
@@ -2309,7 +2309,7 @@ namespace Tilengine
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="xfactor">Horizontal scale factor.</param>
         /// <param name="yfactor">Vertical scale factor.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerScaling(int nlayer, float xfactor, float yfactor);
@@ -2336,7 +2336,7 @@ namespace Tilengine
         /// </remarks>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="affine">Pointer to a TLN_Affine matrix.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerAffineTransform(int nlayer, in TLN_Affine affine);
@@ -2353,7 +2353,7 @@ namespace Tilengine
         /// <param name="dy">Vertical displacement.</param>
         /// <param name="sx">Horizontal scaling.</param>
         /// <param name="sy">Vertical scaling.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerTransform(int layer, float angle, float dx, float dy, float sx, float sy);
@@ -2363,7 +2363,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="table">User-provided array of hres*vres sized TLN_PixelMap items.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerPixelMapping(int nlayer, in TLN_PixelMap table);
@@ -2376,7 +2376,7 @@ namespace Tilengine
         /// <param name="factor">
         /// Deprecated as of 1.12, kept for backwards compatibility but doesn't have effect.
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerBlendMode(int nlayer, TLN_Blend mode, byte factor);
@@ -2398,8 +2398,8 @@ namespace Tilengine
         ///     </para>
         /// </remarks>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
-        /// <param name="offset">Array of offsets to set. Set NULL to disable column offset mode.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <param name="offset">Array of offsets to set. Set <see langword="null"/> to disable column offset mode.</param>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerColumnOffset(int nlayer, int[] offset);
@@ -2412,7 +2412,7 @@ namespace Tilengine
         /// <param name="y1">Top coordinate</param>
         /// <param name="x2">Right coordinate</param>
         /// <param name="y2">Bottom coordinate</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerClip(int nlayer, int x1, int y1, int x2, int y2);
@@ -2421,7 +2421,7 @@ namespace Tilengine
         /// Disables clipping rectangle on selected layer
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DisableLayerClip(int nlayer);
@@ -2432,7 +2432,7 @@ namespace Tilengine
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="width">Horizontal pixel size</param>
         /// <param name="height">Vertical pixel size</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerMosaic(int nlayer, int width, int height);
@@ -2441,7 +2441,7 @@ namespace Tilengine
         /// Disables mosaic effect for selected layer.
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DisableLayerMosaic(int nlayer);
@@ -2450,7 +2450,7 @@ namespace Tilengine
         /// Disables scaling or affine transform for the layer.
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_ResetLayerMode(int nlayer);
@@ -2462,9 +2462,9 @@ namespace Tilengine
         /// <param name="objects">Reference to the TLN_ObjectList to attach.</param>
         /// <param name="tileset">
         /// Optional reference to the image-based tileset object.
-        /// If NULL, object list must have an attached tileset
+        /// If <see langword="null"/>, object list must have an attached tileset
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerObjects(int nlayer, IntPtr objects, IntPtr tileset);
@@ -2474,7 +2474,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="enable">Has full priority.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerPriority(int nlayer, bool enable);
@@ -2497,7 +2497,7 @@ namespace Tilengine
         /// Returns the layer width in pixels.
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DisableLayer(int nlayer);
@@ -2509,7 +2509,7 @@ namespace Tilengine
         /// The layer must have been previously configured. A layer without a prior configuration can't be enabled.
         /// </remarks>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_EnableLayer(int nlayer);
@@ -2575,7 +2575,7 @@ namespace Tilengine
         /// Pointer to an application-allocated <see cref="TLN_TileInfo"/>
         /// struct that will receive the data.
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetLayerTile(int nlayer, int x, int y, out TLN_TileInfo info);
@@ -2609,7 +2609,7 @@ namespace Tilengine
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="spriteset">Reference of the spriteset containing the graphics to set.</param>
         /// <param name="flags">Member or combination of <see cref="TLN_TileFlags"/></param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_ConfigSprite(int nsprite, IntPtr spriteset, TLN_TileFlags flags);
@@ -2623,7 +2623,7 @@ namespace Tilengine
         /// </remarks>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="spriteset">Reference of the spriteset containing the graphics to set.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpriteSet(int nsprite, IntPtr spriteset);
@@ -2633,7 +2633,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="flags">Member or combination of <see cref="TLN_TileFlags"/></param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpriteFlags(int nsprite, TLN_TileFlags flags);
@@ -2643,8 +2643,8 @@ namespace Tilengine
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="flag">Member or combination of <see cref="TLN_TileFlags"/> to modify.</param>
-        /// <param name="enable">true to enable, false to disable.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <param name="enable"><see langword="true"/> to enable, <see langword="false"/> to disable.</param>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_EnableSpriteFlag(int nsprite, TLN_TileFlags flag, bool enable);
@@ -2658,7 +2658,7 @@ namespace Tilengine
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="px">Horizontal normalized value (0.0 = full left, 1.0 = full right)</param>
         /// <param name="py">Vertical normalized value (0.0 = full top, 1.0 = full bottom)</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpritePivot(int nsprite, float px, float py);
@@ -2679,7 +2679,7 @@ namespace Tilengine
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="x">Horizontal position of pivot (0 = left margin)</param>
         /// <param name="y">Vertical position of pivot (0 = top margin)</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpritePosition(int nsprite, int x, int y);
@@ -2689,7 +2689,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="entry">Index of the actual picture inside the spriteset to assign.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpritePicture(int nsprite, int entry);
@@ -2699,7 +2699,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="palette">Reference of the palette to assign.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpritePalette(int nsprite, IntPtr palette);
@@ -2712,7 +2712,7 @@ namespace Tilengine
         /// <param name="factor">
         /// <b>Deprecated as of 1.12, kept for backwards compatibility but doesn't have effect.</b>
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpriteBlendMode(int nsprite, TLN_Blend mode, byte factor);
@@ -2734,7 +2734,7 @@ namespace Tilengine
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="sx">Horizontal scale factor</param>
         /// <param name="sy">Vertical scale factor</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpriteScaling(int nsprite, float sx, float sy);
@@ -2743,7 +2743,7 @@ namespace Tilengine
         /// Disables scaling for a given sprite.
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_ResetSpriteScaling(int nsprite);
@@ -2779,8 +2779,8 @@ namespace Tilengine
         ///     </para>
         /// </remarks>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
-        /// <param name="enable">Set to true to enable, false to disable.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <param name="enable">Set to true to enable, <see langword="false"/> to disable.</param>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_EnableSpriteCollision(int nsprite, bool enable);
@@ -2789,7 +2789,7 @@ namespace Tilengine
         /// Gets the collision status of a given sprite.
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
-        /// <returns>true if this sprite is involved in a collision with another sprite.</returns>
+        /// <returns><see langword="true"/> if this sprite is involved in a collision with another sprite.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetSpriteCollision(int nsprite);
@@ -2801,7 +2801,7 @@ namespace Tilengine
         /// <param name="state">
         /// Pointer to a user-allocated TLN_SpriteState structure to fill with requested data
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetSpriteState(int nsprite, out TLN_SpriteState state);
@@ -2812,7 +2812,7 @@ namespace Tilengine
         /// <param name="nsprite">
         /// Index of the sprite [0, num_sprites - 1]. Must be enabled (visible)
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetFirstSprite(int nsprite);
@@ -2826,7 +2826,7 @@ namespace Tilengine
         /// <param name="next">
         /// Index of the sprite to draw after Id [0, num_sprites - 1]. Must be enabled (visible)
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetNextSprite(int nsprite, int next);
@@ -2837,8 +2837,8 @@ namespace Tilengine
         /// drawn inside the region set up with TLN_SetSpritesMaskRegion()
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
-        /// <param name="enable">Set to true to enable, false to disable.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <param name="enable">Set to true to enable, <see langword="false"/> to disable.</param>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_EnableSpriteMasking(int nsprite, bool enable);
@@ -2858,7 +2858,7 @@ namespace Tilengine
         /// <param name="nsprite">If of the sprite to animate.</param>
         /// <param name="sequence">Reference of the sequence to assign.</param>
         /// <param name="loop">Amount of times to loop, 0 = infinite.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpriteAnimation(int nsprite, IntPtr sequence, int loop);
@@ -2867,7 +2867,7 @@ namespace Tilengine
         /// Disables animation for the given sprite.
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DisableSpriteAnimation(int nsprite);
@@ -2876,7 +2876,7 @@ namespace Tilengine
         /// Pauses animation for the given sprite.
         /// </summary>
         /// <param name="index">Index of the sprite [0, num_sprites - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_PauseSpriteAnimation(int index);
@@ -2885,7 +2885,7 @@ namespace Tilengine
         /// Restores animation for the given sprite.
         /// </summary>
         /// <param name="index">Index of the sprite [0, num_sprites - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_ResumeSpriteAnimation(int index);
@@ -2899,7 +2899,7 @@ namespace Tilengine
         /// function TLN_GetAvailableSprite as available.
         /// </remarks>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DisableSprite(int nsprite);
@@ -2953,7 +2953,7 @@ namespace Tilengine
         /// Trailing numbers in sprite names must start with 1 and be correlative. <br/>
         /// (eg basename1... basename14)
         /// </remarks>
-        /// <param name="name">Optional name used to retrieve it when adding to a TLN_SequencePack, can be NULL.</param>
+        /// <param name="name">Optional name used to retrieve it when adding to a TLN_SequencePack, can be <see langword="null"/>.</param>
         /// <param name="sprite_set">Reference to the spriteset with frames to animate.</param>
         /// <param name="basename">Base of the sprite name for the numbered sequence.</param>
         /// <param name="delay">Number of ticks to delay between frame.</param>
@@ -2980,7 +2980,7 @@ namespace Tilengine
         /// <param name="info">
         /// Pointer to a user-provided TLN_SequenceInfo structure to hold the returned data.
         /// </param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetSequenceInfo(IntPtr sequence, out TLN_SequenceInfo info);
@@ -2992,7 +2992,7 @@ namespace Tilengine
         /// <b>Don't delete an active sequence.</b>
         /// </remarks>
         /// <param name="sequence">Reference to the sequence.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeleteSequence(IntPtr sequence);
@@ -3060,7 +3060,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="sp">Reference to the sequence pack.</param>
         /// <param name="sequence">Reference to the sequence to attach.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_AddSequenceToPack(IntPtr sp, IntPtr sequence);
@@ -3073,7 +3073,7 @@ namespace Tilengine
         /// The attached sequences are also deleted, so they don't need to be deleted externally.
         /// </remarks>
         /// <param name="sp">Reference to the sequence pack.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeleteSequencePack(IntPtr sp);
@@ -3088,8 +3088,8 @@ namespace Tilengine
         /// <param name="index">Index of the animation to set [0, num_animations - 1]</param>
         /// <param name="palette">Reference of the palette to be animated.</param>
         /// <param name="sequence">Reference of the sequence to assign.</param>
-        /// <param name="blend">true for smooth frame interpolation, false for classic, discrete mode.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <param name="blend"><see langword="true"/> for smooth frame interpolation, <see langword="false"/> for classic, discrete mode.</param>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetPaletteAnimation(int index, IntPtr palette, IntPtr sequence, bool blend);
@@ -3103,7 +3103,7 @@ namespace Tilengine
         /// </remarks>
         /// <param name="index">Index of the animation to set [0, num_animations - 1]</param>
         /// <param name="palette">Reference of the palette to assign.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetPaletteAnimationSource(int index, IntPtr palette);
@@ -3112,7 +3112,7 @@ namespace Tilengine
         /// Gets the state of the animation for a given sprite.
         /// </summary>
         /// <param name="index">Index of the sprite to set [0, num_sprites - 1]</param>
-        /// <returns>true if animation is running, false if it's finished or inactive</returns>
+        /// <returns><see langword="true"/> if animation is running, <see langword="false"/> if it is finished or inactive</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_GetAnimationState(int index);
@@ -3123,7 +3123,7 @@ namespace Tilengine
         /// <param name="index">Index of the sprite to set [0, num_sprites - 1]</param>
         /// <param name="frame">Index of the animation frame to change delay in [0, num_sequence - 1]</param>
         /// <param name="delay">Delay of the animation frame.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetAnimationDelay(int index, int frame, int delay);
@@ -3139,7 +3139,7 @@ namespace Tilengine
         /// Disables the color cycle animation so it stops playing.
         /// </summary>
         /// <param name="index">Index of the animation to set [0, num_animations - 1]</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DisablePaletteAnimation(int index);
@@ -3153,7 +3153,7 @@ namespace Tilengine
         /// </summary>
         /// <param name="tmxfile">TMX file to load.</param>
         /// <param name="first_layer">Starting layer number where place the loaded tmx.</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_LoadWorld(string tmxfile, int first_layer);
@@ -3172,7 +3172,7 @@ namespace Tilengine
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <param name="x">Horizontal parallax factor</param>
         /// <param name="y">Vertical parallax factor</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerParallaxFactor(int nlayer, float x, float y);
@@ -3183,7 +3183,7 @@ namespace Tilengine
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="x">Horizontal world position of pivot (0 = left margin)</param>
         /// <param name="y">Vertical world position of pivot (0 = top margin)</param>
-        /// <returns>true if successful or false if an error occurred.</returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpriteWorldPosition(int nsprite, int x, int y);
