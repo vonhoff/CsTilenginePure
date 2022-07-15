@@ -11,10 +11,10 @@ namespace Scaling
         private const int MinScale = 50;
         private const int MaxScale = 200;
 
-        private static readonly RGB[] SkyColors =
+        private static readonly ColorRgb[] SkyColors =
         {
-            new RGB(0x19, 0x54, 0x75),
-            new RGB(0x2C, 0xB0, 0xDC)
+            new(0x19, 0x54, 0x75),
+            new(0x2C, 0xB0, 0xDC)
         };
 
         private static int _xpos;
@@ -87,14 +87,13 @@ namespace Scaling
                 // Update position
                 var bgypos = Lerp(_scale, MinScale, MaxScale, 0, 80);
                 TLN_SetLayerPosition(ForegroundLayer, _xpos * 2, _ypos);
-                TLN_SetLayerPosition(BackgroundLayer, _xpos, (int) bgypos);
+                TLN_SetLayerPosition(BackgroundLayer, _xpos, (int)bgypos);
                 TLN_SetLayerScaling(ForegroundLayer, foregroundScale, foregroundScale);
                 TLN_SetLayerScaling(BackgroundLayer, backgroundScale, backgroundScale);
 
                 // Draw to window
                 TLN_DrawFrame(0);
             }
-
         }
 
         /// <summary>
@@ -107,24 +106,26 @@ namespace Scaling
 
         private static void RasterCallback(int line)
         {
-            if (line <= 152)
+            if (line > 152)
             {
-                RGB color = new()
-                {
-                    R = (byte)Lerp(line, 0, 152, SkyColors[0].R, SkyColors[1].R),
-                    G = (byte)Lerp(line, 0, 152, SkyColors[0].G, SkyColors[1].G),
-                    B = (byte)Lerp(line, 0, 152, SkyColors[0].B, SkyColors[1].B)
-                };
-
-                TLN_SetBGColor(color.R, color.G, color.B);
+                return;
             }
+
+            ColorRgb color = new()
+            {
+                R = (byte)Lerp(line, 0, 152, SkyColors[0].R, SkyColors[1].R),
+                G = (byte)Lerp(line, 0, 152, SkyColors[0].G, SkyColors[1].G),
+                B = (byte)Lerp(line, 0, 152, SkyColors[0].B, SkyColors[1].B)
+            };
+
+            TLN_SetBGColor(color.R, color.G, color.B);
         }
 
-        private struct RGB
+        private struct ColorRgb
         {
             public byte R, G, B;
 
-            public RGB(byte r, byte g, byte b)
+            public ColorRgb(byte r, byte g, byte b)
             {
                 R = r;
                 G = g;

@@ -48,7 +48,7 @@ namespace TestMouse
             }
 
             TLN_CreateWindow(null, 0);
-            TLN_SetSDLCallback(SDLCallback);
+            TLN_SetSDLCallback(SdlCallback);
 
             var frame = 0;
             while (TLN_ProcessWindow())
@@ -57,31 +57,40 @@ namespace TestMouse
             }
         }
 
-        public static void SDLCallback(in SDL_Event sdl_event)
+        public static void SdlCallback(in SDL_Event sdlEvent)
         {
-            if (sdl_event.type == SDL_EventType.SDL_MOUSEBUTTONDOWN)
+            switch (sdlEvent.type)
             {
-                var mouse = sdl_event.button;
-
-                // Scale from window space to framebuffer space.
-                mouse.x = mouse.x * Width / TLN_GetWindowWidth();
-                mouse.y = mouse.y * Height / TLN_GetWindowHeight();
-
-                // Check if the mouse is over an entity.
-                for (var c = 0; c < MaxEntities; c++)
+                case SDL_EventType.SDL_MOUSEBUTTONDOWN:
                 {
-                    var entity = Entities[c];
-                    if (entity.Enabled && mouse.x >= entity.X && mouse.y >= entity.Y &&
-                        mouse.x < entity.X + entity.W && mouse.y < entity.Y + entity.H)
+                    var mouse = sdlEvent.button;
+
+                    // Scale from window space to frame buffer space.
+                    mouse.x = mouse.x * Width / TLN_GetWindowWidth();
+                    mouse.y = mouse.y * Height / TLN_GetWindowHeight();
+
+                    // Check if the mouse is over an entity.
+                    for (var c = 0; c < MaxEntities; c++)
                     {
-                        _selectedEntity = entity;
-                        _selectedEntity.OnClick(_paletteSelect);
+                        var entity = Entities[c];
+                        if (entity.Enabled && 
+                            mouse.x >= entity.X && 
+                            mouse.y >= entity.Y &&
+                            mouse.x < entity.X + entity.W && 
+                            mouse.y < entity.Y + entity.H)
+                        {
+                            _selectedEntity = entity;
+                            _selectedEntity.OnClick(_paletteSelect);
+                        }
                     }
+
+                    break;
                 }
-            }
-            else if (sdl_event.type == SDL_EventType.SDL_MOUSEBUTTONUP)
-            {
-                _selectedEntity?.OnRelease(_paletteDefault);
+                case SDL_EventType.SDL_MOUSEBUTTONUP:
+                {
+                    _selectedEntity?.OnRelease(_paletteDefault);
+                    break;
+                }
             }
         }
     }

@@ -25,7 +25,7 @@ namespace Platformer
         private static readonly float[] IncBackground = new float[6];
         private static readonly float[] PosBackground = new float[6];
 
-        private static readonly RGB[] SkyColors = {
+        private static readonly ColorRgb[] SkyColors = {
             new (0x1B, 0x00, 0x8B),
             new (0x00, 0x74, 0xD7),
             new (0x24, 0x92, 0xDB),
@@ -122,9 +122,9 @@ namespace Platformer
             TLN_Deinit();
         }
 
-        private static void InterpolateColor(int v, int v1, int v2, RGB color1, RGB color2, out RGB result)
+        private static void InterpolateColor(int v, int v1, int v2, ColorRgb color1, ColorRgb color2, out ColorRgb result)
         {
-            result = new RGB
+            result = new ColorRgb
             {
                 R = (byte)Lerp(v, v1, v2, color1.R, color2.R),
                 G = (byte)Lerp(v, v1, v2, color1.G, color2.G),
@@ -158,24 +158,29 @@ namespace Platformer
                 TLN_SetLayerPosition(BackgroundLayer, (int)pos, 0);
             }
 
-            // Background color gradients
-            if (line < 112)
+            switch (line)
             {
-                InterpolateColor(line, 0, 112, SkyColors[0], SkyColors[1], out var color);
-                TLN_SetBGColor(color.R, color.G, color.B);
-            }
-            else if (line >= 144)
-            {
-                InterpolateColor(line, 144, Height, SkyColors[2], SkyColors[3], out var color);
-                TLN_SetBGColor(color.R, color.G, color.B);
+                // Background color gradients
+                case < 112:
+                {
+                    InterpolateColor(line, 0, 112, SkyColors[0], SkyColors[1], out var color);
+                    TLN_SetBGColor(color.R, color.G, color.B);
+                    break;
+                }
+                case >= 144:
+                {
+                    InterpolateColor(line, 144, Height, SkyColors[2], SkyColors[3], out var color);
+                    TLN_SetBGColor(color.R, color.G, color.B);
+                    break;
+                }
             }
         }
 
-        private struct RGB
+        private struct ColorRgb
         {
             public byte R, G, B;
 
-            public RGB(byte r, byte g, byte b)
+            public ColorRgb(byte r, byte g, byte b)
             {
                 R = r;
                 G = g;

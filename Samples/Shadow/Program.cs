@@ -11,7 +11,7 @@ namespace Shadow
         private const int Height = 240;
         private const int Speed = 2;
 
-        private static readonly RGB[] SkyColors =
+        private static readonly ColorRgb[] SkyColors =
         {
             new (0x1D, 0x44, 0x7B),
             new (0x7F, 0xA4, 0xD9),
@@ -19,8 +19,8 @@ namespace Shadow
             new (0xEB, 0x99, 0x9D),
         };
 
-        private static RGB _skyHigh;
-        private static RGB _skyLow;
+        private static ColorRgb _skyHigh;
+        private static ColorRgb _skyLow;
         private static int _xpos;
 
         public static void Main(string[] args)
@@ -111,7 +111,7 @@ namespace Shadow
             if (line < 192)
             {
                 // Interpolate between two colors
-                RGB color = new()
+                ColorRgb color = new()
                 {
                     R = Lerp(line, 0, 191, _skyHigh.R, _skyLow.R),
                     G = Lerp(line, 0, 191, _skyHigh.G, _skyLow.G),
@@ -123,17 +123,30 @@ namespace Shadow
 
             // Background layer
             var pos = -1;
-            if (line == 0 || line == 24 || line == 64 || line == 88 || line == 96)
+            switch (line)
             {
-                pos = Lerp(line, 0, 96, (int)(_xpos * 0.7f), (int)(_xpos * 0.2f));
-            }
-            else if (line == 120)
-            {
-                pos = _xpos / 2;
-            }
-            else if (line == 208 || line == 216 || line == 224 || line == 232)
-            {
-                pos = Lerp(line, 208, 232, (int)(_xpos * 1.0f), (int)(_xpos * 2.0f));
+                case 0:
+                case 24:
+                case 64:
+                case 88:
+                case 96:
+                {
+                    pos = Lerp(line, 0, 96, (int)(_xpos * 0.7f), (int)(_xpos * 0.2f));
+                    break;
+                }
+                case 120:
+                {
+                    pos = _xpos / 2;
+                    break;
+                }
+                case 208:
+                case 216:
+                case 224:
+                case 232:
+                {
+                    pos = Lerp(line, 208, 232, (int)(_xpos * 1.0f), (int)(_xpos * 2.0f));
+                    break;
+                }
             }
 
             // Set layer position of background layer
@@ -142,15 +155,12 @@ namespace Shadow
                 TLN_SetLayerPosition(BackgroundLayer, pos, 0);
             }
 
-            pos = -1;
-            if (line == 0)
+            pos = line switch
             {
-                pos = _xpos;
-            }
-            else if (line == 216)
-            {
-                pos = _xpos * 3;
-            }
+                0 => _xpos,
+                216 => _xpos * 3,
+                _ => -1
+            };
 
             // Set layer position of foreground layer
             if (pos != -1)
@@ -159,11 +169,11 @@ namespace Shadow
             }
         }
 
-        private struct RGB
+        private struct ColorRgb
         {
             public byte R, G, B;
 
-            public RGB(byte r, byte g, byte b)
+            public ColorRgb(byte r, byte g, byte b)
             {
                 R = r;
                 G = g;

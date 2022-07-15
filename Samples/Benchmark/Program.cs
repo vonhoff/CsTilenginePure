@@ -66,8 +66,8 @@ namespace Benchmark
                 TLN_SetSpritePicture(c, 0);
                 TLN_SetSpritePosition(c, x * 15, y * 21);
             }
-            TLN_GetSpriteInfo(spriteset, 0, out var sprite_info);
-            _pixels = AmountOfSprites * sprite_info.w * sprite_info.h;
+            TLN_GetSpriteInfo(spriteset, 0, out var spriteInfo);
+            _pixels = AmountOfSprites * spriteInfo.w * spriteInfo.h;
 
             Console.Write("Normal sprites........");
             Profile();

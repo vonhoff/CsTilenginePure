@@ -187,18 +187,24 @@ namespace Barrel
             switch (_state)
             {
                 case State.Idle:
+                {
                     TLN_DisableSpriteAnimation(0);
                     TLN_SetSpritePicture(0, 0);
                     break;
+                }
 
                 case State.Walking:
+                {
                     TLN_SetSpriteAnimation(0, _walkSequence, 0);
                     break;
+                }
 
                 case State.Airborne:
+                {
                     TLN_DisableSpriteAnimation(0);
                     TLN_SetSpritePicture(0, 7);
                     break;
+                }
             }
         }
     }

@@ -63,7 +63,7 @@ namespace Forest
                 }
             }
 
-            /* release resources */
+            // Release resources.
             TLN_ReleaseWorld();
             TLN_DeleteWindow();
             TLN_Deinit();

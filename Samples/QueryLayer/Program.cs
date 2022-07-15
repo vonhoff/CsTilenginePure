@@ -49,13 +49,16 @@ namespace QueryLayer
             switch (type)
             {
                 case TLN_LayerType.LAYER_TILE:
+                {
                     var tilemap = TLN_GetLayerTilemap(layerIndex);
                     Console.WriteLine("  Tileset: {0}", TLN_GetLayerTileset(layerIndex));
                     Console.WriteLine("  Tilemap: {0}", tilemap);
                     Console.WriteLine("  Tilemap dimensions: {0} rows, {1} columns", TLN_GetTilemapRows(tilemap), TLN_GetTilemapCols(tilemap));
                     break;
+                }
 
                 case TLN_LayerType.LAYER_OBJECT:
+                {
                     var listPtr = TLN_GetLayerObjects(layerIndex);
                     Console.WriteLine("  Tileset: {0}", TLN_GetLayerTileset(layerIndex));
                     Console.WriteLine("  Objects: {0}", listPtr);
@@ -68,10 +71,13 @@ namespace QueryLayer
                     }
 
                     break;
+                }
 
                 case TLN_LayerType.LAYER_BITMAP:
+                {
                     Console.WriteLine("  Bitmap: {0}", TLN_GetLayerBitmap(layerIndex));
                     break;
+                }
             }
         }
     }
