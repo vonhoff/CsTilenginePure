@@ -46,6 +46,7 @@ namespace Tilengine
 {
     public static class TLN
     {
+        #pragma warning disable CA1401 // P/Invokes should not be visible
         #region CsTilenginePure
 
         private const string NativeLibName = "Tilengine";
@@ -1275,7 +1276,7 @@ namespace Tilengine
         /// CWF_FULLSCREEN, CWF_VSYNC, CWF_S1 - CWF_S5 (scaling factor, none = auto max)
         /// </param>
         /// <returns><see langword="true"/> if the window was created or <see langword="false"/> if an error occurred.</returns>
-        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_CreateWindow(string? overlay, TLN_CreateWindowFlags flags);
 
@@ -1297,7 +1298,7 @@ namespace Tilengine
         /// CWF_FULLSCREEN, CWF_VSYNC, CWF_S1 - CWF_S5 (scaling factor, none = auto max)
         /// </param>
         /// <returns><see langword="true"/> if the window was created or <see langword="false"/> if an error occurred.</returns>
-        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_CreateWindowThread(string overlay, TLN_CreateWindowFlags flags);
 
@@ -1305,7 +1306,7 @@ namespace Tilengine
         /// Sets window title.
         /// </summary>
         /// <param name="title">Text with the title to set.</param>
-        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern void TLN_SetWindowTitle(string title);
 
         /// <summary>
@@ -1546,7 +1547,7 @@ namespace Tilengine
         /// <returns>
         /// Reference to the newly loaded spriteset, or <see cref="IntPtr.Zero"/> if an error occurred.
         /// </returns>
-        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
         public static extern IntPtr TLN_LoadSpriteset(string name);
 
         /// <summary>
@@ -1619,7 +1620,7 @@ namespace Tilengine
         /// <remarks>
         /// <b>Don't delete a spriteset which is attached to a sprite.</b>
         /// </remarks>
-        /// <param name="Spriteset">Reference to the spriteset.</param>
+        /// <param name="spriteset">Reference to the spriteset.</param>
         /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
