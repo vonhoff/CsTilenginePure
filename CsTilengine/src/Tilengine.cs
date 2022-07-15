@@ -37,16 +37,17 @@
 
 #region Using Statements
 
-using SDL2;
 using System.Runtime.InteropServices;
+using SDL2;
 
 #endregion
+
+#pragma warning disable CA1401 // P/Invokes should not be visible
 
 namespace Tilengine
 {
     public static class TLN
     {
-        #pragma warning disable CA1401 // P/Invokes should not be visible
         #region CsTilenginePure
 
         private const string NativeLibName = "Tilengine";
