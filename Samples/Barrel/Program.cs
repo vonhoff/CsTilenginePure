@@ -111,19 +111,25 @@ namespace Barrel
 
             TLN_SetLayerAffineTransform(BackgroundLayer, _transform);
 
-            if (line < 70)
+            switch (line)
             {
-                var index = (int)Lerp(line, 0, 70, 0, 7);
-                TLN_SetLayerPalette(BackgroundLayer, Palettes[index]);
-            }
-            else if (line > 170)
-            {
-                var index = (int)Lerp(line, 170, Height, 7, 0);
-                TLN_SetLayerPalette(BackgroundLayer, Palettes[index]);
-            }
-            else
-            {
-                TLN_SetLayerPalette(BackgroundLayer, Palettes[7]);
+                case < 70:
+                {
+                    var index = (int)Lerp(line, 0, 70, 0, 7);
+                    TLN_SetLayerPalette(BackgroundLayer, Palettes[index]);
+                    break;
+                }
+                case > 170:
+                {
+                    var index = (int)Lerp(line, 170, Height, 7, 0);
+                    TLN_SetLayerPalette(BackgroundLayer, Palettes[index]);
+                    break;
+                }
+                default:
+                {
+                    TLN_SetLayerPalette(BackgroundLayer, Palettes[7]);
+                    break;
+                }
             }
         }
     }
