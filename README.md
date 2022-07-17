@@ -7,7 +7,7 @@ The naming schemes for this library will match those of the C library, with litt
 Everything else will be as close to the C version as technically possible.
 
 ## Contents
-* The ```src``` directory contains the single `Tilengine.cs` module with the binding itself.
+* The ```src/``` directory contains the single `Tilengine.cs` module with the binding itself.
 
 ## Prerequisites
 You will need to install the Tilengine native shared library separately. You can find instructions on how to do so at https://github.com/megamarc/Tilengine.
@@ -30,7 +30,7 @@ The samples for this binding have been moved to its own repository to prevent mu
 These samples are now located at https://github.com/vonhoff/CsTilenginePure.Samples.
 
 ## Basic program
-The following program requires assets from https://github.com/vonhoff/CsTilenginePure.Samples/src/Platformer/assets. You need to include this directory in your binary folder to get the desired result.
+The following program requires assets from the [Platfomer sample](https://github.com/vonhoff/CsTilenginePure.Samples/tree/main/src/Platformer/assets). You need to include this directory in your binary folder to get the desired result.
 
 The program does the following actions:
 1. Initializes the engine with a resolution of 400x240, one layer, no sprites, and 20 animation slots.
