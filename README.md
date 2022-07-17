@@ -22,7 +22,11 @@ sudo apt-get install mono-mcs
 ```
 
 ## Installation
-No installation step is required. Just make sure that the Tilengine library and the `Tilengine.cs` modules are accessible from within your own project. This could be done by creating a submodule or copying the file into your project.
+The C# binding for SDL2 is required. This binding is included as a submodule for this repository.
+
+You have to make sure that `SDL2.cs` and `Tilengine.cs` are accessible from within your own project. This could be done by creating a submodule of this repository for your project with the recursive parameter set to true.
+
+Alternatively, you could add the project in this repository as a reference to your project.
 
 ## Samples
 The samples for this binding have been moved to its own repository to prevent multiple ```Main``` methods from interfering when using this binding as a submodule. 
