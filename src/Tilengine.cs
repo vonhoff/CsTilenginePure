@@ -28,7 +28,7 @@
 
 /*
  *****************************************************************************
- * C# Tilengine wrapper - Up to date to library version 2.9.5
+ * C# Tilengine binding - Up to date to library version 2.9.5
  * http://www.tilengine.org
  *****************************************************************************
  */
