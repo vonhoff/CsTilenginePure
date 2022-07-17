@@ -1,12 +1,16 @@
+![Logo](Logo.png)
+
 # CsTilenginePure
-CsTilenginePure is a pure port of the C headers in [Tilengine](https://github.com/megamarc/Tilengine). The naming of the library is identical to that of the C library, with little to no consideration for the appropriate C# style. Everything is as close to the C version as is technically possible.
+CsTilenginePure is an alternative C# binding for [Tilengine](https://github.com/megamarc/Tilengine). 
+It is a direct 1:1 API translation of the original C library, so it is used and works exactly as its C counterpart. 
+The naming schemes for this library will match those of the C library, with little-to-no concern for the standard C# style. 
+Everything else will be as close to the C version as technically possible.
 
 ## Contents
-* */CsTilengine/src* directory contains the single `Tilengine.cs` module with the binding itself
-* */samples* directory contains various examples ready to run and test
+* The ```src``` directory contains the single `Tilengine.cs` module with the binding itself.
 
 ## Prerequisites
-Tilengine native shared library must be installed separately. Please refer to https://github.com/megamarc/Tilengine about how to do it.
+You will need to install the Tilengine native shared library separately. You can find instructions on how to do so at https://github.com/megamarc/Tilengine.
 
 ### Windows
 .NET Framework 2.0 or later must be installed
@@ -18,17 +22,23 @@ sudo apt-get install mono-mcs
 ```
 
 ## Installation
-No install step is required. Just make sure that the Tilengine library and the `Tilengine.cs` modules are accessible from within your own project
+No installation step is required. Just make sure that the Tilengine library and the `Tilengine.cs` modules are accessible from within your own project. This could be done by creating a submodule or copying the file into your project.
+
+## Samples
+The samples for this binding have been moved to its own repository to prevent multiple ```Main``` methods from interfering when using this binding as a submodule. 
+
+These samples are now located at https://github.com/vonhoff/CsTilenginePure.Samples.
 
 ## Basic program
-The following program does these actions:
-1. Import required classes from tilengine binding
-2. Initialize the engine with a resolution of 400x240, one layer, no sprites and 20 animation slots
-3. Set the loading path to the assets folder
-4. Load a *tilemap*, the asset that contains background layer data
-5. Attach the loaded tilemap to the allocated background layer
-6. Create a display window with default parameters: windowed, auto scale and CRT effect enabled
-7. Run the window loop, updating the display at each iteration until the window is closed
+The following program requires assets from https://github.com/vonhoff/CsTilenginePure.Samples/src/Platformer/assets. You need to include this directory in your binary folder to get the desired result.
+
+The program does the following actions:
+1. Initializes the engine with a resolution of 400x240, one layer, no sprites, and 20 animation slots.
+2. Sets the loading path to the assets folder.
+3. Loads a tilemap, which is an asset that contains background layer data.
+4. Attaches the loaded tilemap to the allocated background layer.
+5. Creates a display window with default parameters: windowed, auto scale, and CRT effect enabled.
+6. Runs the window loop, updating the display at each iteration until the window is closed.
 
 Source code:
 ```csharp
@@ -39,7 +49,7 @@ public class Test
     public static void Main(string[] args)
     {
         TLN_Init(400, 240, 2, 1, 1);
-        TLN_SetLoadPath("assets/sonic");
+        TLN_SetLoadPath("assets");
         var foreground = TLN_LoadTilemap("Sonic_md_fg1.tmx", null);
         TLN_SetLayerTilemap(0, foreground);
 
@@ -56,9 +66,5 @@ Resulting output:
 
 ![Test](test.png)
 
-## Running the samples (Windows)
-There's a `CsTilengine.sln` Visual Studio solution file. Open it, navigate to the *Samples* folder.
-Build a project and you'll get one executable ready to run.
-
 ## License
-CsTilenginePure is released under the permissive MIT license.
+- Copyright &copy; 2022 Simon Vonhoff & Contributors - Provided under the permissive [MIT License](LICENSE).
