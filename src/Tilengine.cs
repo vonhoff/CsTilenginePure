@@ -28,7 +28,7 @@
 
 /*
  *****************************************************************************
- * C# Tilengine binding - Up to date to library version 2.9.5
+ * C# Tilengine binding - Up to date to library version 2.9.5 and above.
  * http://www.tilengine.org
  *****************************************************************************
  */
@@ -1424,10 +1424,8 @@ namespace Tilengine
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void TLN_DeleteWindow();
 
-        /// <summary>
-        /// <b>Removed in release 1.12, use TLN_EnableCRTEffect() instead.</b>
-        /// </summary>
         /// <param name="mode">Enable or disable effect</param>
+        [Obsolete("Use " + nameof(TLN_EnableCRTEffect) + " instead.")]
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void TLN_EnableBlur(bool mode);
 
@@ -1820,8 +1818,8 @@ namespace Tilengine
         /// Sets a tile of a tilemap.
         /// </summary>
         /// <param name="tilemap">Reference to the tilemap.</param>
-        /// <param name="row">Row (vertical position) of the tile [0 - num_rows - 1]</param>
-        /// <param name="col">Column (horizontal position) of the tile [0 - num_cols - 1]</param>
+        /// <param name="row">Row (vertical position) of the tile [0, num_rows - 1]</param>
+        /// <param name="col">Column (horizontal position) of the tile [0, num_cols - 1]</param>
         /// <param name="tile">Reference to the tile to set, or <see langword="null"/> to set an empty tile.</param>
         /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
@@ -2142,10 +2140,6 @@ namespace Tilengine
         /// <summary>
         /// Creates a TLN_ObjectList.
         /// </summary>
-        /// <remarks>
-        /// The list is created empty, it must be populated with TLN_AddSpriteToList()
-        /// and assigned to a layer with TLN_SetLayerObjects()
-        /// </remarks>
         /// <returns>Reference to the new object list, or <see cref="IntPtr.Zero"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TLN_CreateObjectList();
@@ -2182,7 +2176,7 @@ namespace Tilengine
         public static extern IntPtr TLN_CloneObjectList(IntPtr src);
 
         /// <summary>
-        /// Gets the number of items in a TLN_ObjectList
+        /// Gets the number of items in a TLN_ObjectList.
         /// </summary>
         /// <param name="list">Pointer to TLN_ObjectList to query.</param>
         /// <returns>The number of items.</returns>
@@ -2190,7 +2184,7 @@ namespace Tilengine
         public static extern int TLN_GetListNumObjects(IntPtr list);
 
         /// <summary>
-        /// Iterates over elements in a TLN_ObjectList
+        /// Iterates over elements in a TLN_ObjectList.
         /// </summary>
         /// <param name="list">Reference to TLN_ObjectList to get items.</param>
         /// <param name="info">Pointer to user-allocated TLN_ObjectInfo struct</param>
@@ -2213,7 +2207,6 @@ namespace Tilengine
         #region Layers
 
         /// <summary>
-        /// <b>Deprecated, use <see cref="TLN_SetLayerTilemap"/> instead.</b> <br/>
         /// Configures a background layer with the specified tileset and tilemap.
         /// </summary>
         /// <remarks>
@@ -2227,6 +2220,7 @@ namespace Tilengine
         /// </param>
         /// <param name="tilemap">Reference to the tilemap to assign.</param>
         /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
+        [Obsolete("Use " + nameof(TLN_SetLayerTilemap) + " instead.")]
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayer(int nlayer, IntPtr tileset, IntPtr tilemap);
@@ -2381,7 +2375,7 @@ namespace Tilengine
         /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
-        public static extern bool TLN_SetLayerBlendMode(int nlayer, TLN_Blend mode, byte factor);
+        public static extern bool TLN_SetLayerBlendMode(int nlayer, TLN_Blend mode, byte factor = 0);
 
         /// <summary>
         /// Enables column offset mode for this layer.
@@ -2481,22 +2475,18 @@ namespace Tilengine
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerPriority(int nlayer, bool enable);
 
-        /// <summary>
-        /// <b>Removed, kept for API compatibility.</b>
-        /// </summary>
+        [Obsolete("Removed, kept for API compatibility.")]
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetLayerParent(int nlayer, int parent);
 
-        /// <summary>
-        /// <b>Removed, kept for API compatibility.</b>
-        /// </summary>
+        [Obsolete("Removed, kept for API compatibility.")]
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DisableLayerParent(int nlayer);
 
         /// <summary>
-        /// Returns the layer width in pixels.
+        /// Disables the specified layer so it is not drawn.
         /// </summary>
         /// <param name="nlayer">Layer index [0, num_layers - 1]</param>
         /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
@@ -2630,12 +2620,10 @@ namespace Tilengine
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpriteSet(int nsprite, IntPtr spriteset);
 
-        /// <summary>
-        /// <b>Deprecated, use <see cref="TLN_EnableSpriteFlag"/> to set flags instead.</b>
-        /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="flags">Member or combination of <see cref="TLN_TileFlags"/></param>
         /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
+        [Obsolete("Use " + nameof(TLN_EnableSpriteFlag) + " to set flags instead.")]
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_SetSpriteFlags(int nsprite, TLN_TileFlags flags);
@@ -2712,12 +2700,12 @@ namespace Tilengine
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="mode">Member of the <see cref="TLN_Blend"/> enumeration.</param>
         /// <param name="factor">
-        /// <b>Deprecated as of 1.12, kept for backwards compatibility but doesn't have effect.</b>
+        /// Deprecated as of 1.12, kept for backwards compatibility but doesn't have effect.
         /// </param>
         /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
-        public static extern bool TLN_SetSpriteBlendMode(int nsprite, TLN_Blend mode, byte factor);
+        public static extern bool TLN_SetSpriteBlendMode(int nsprite, TLN_Blend mode, byte factor = 0);
 
         /// <summary>
         /// Sets the scaling factor of the sprite.
@@ -2726,7 +2714,7 @@ namespace Tilengine
         ///     <para>
         ///         By default the scaling factor of a given sprite is 1.0f, 1.0f, which means
         ///         no scaling. Use values below 1.0 to downscale (shrink) and above 1.0 to upscale (enlarge).
-        ///         Call TLN_ResetScaling() to disable scaling.
+        ///         Call <see cref="TLN_ResetSpriteScaling"/> to disable scaling.
         ///     </para>
         ///     <para>
         ///         The rendering of a sprite with scaling enabled requires
@@ -2834,13 +2822,13 @@ namespace Tilengine
         public static extern bool TLN_SetNextSprite(int nsprite, int next);
 
         /// <summary>
-        /// <b>Deprecated, use <see cref="TLN_EnableSpriteFlag"/> instead.</b>
         /// Enables or disables masking for this sprite, if enabled it won't be
-        /// drawn inside the region set up with TLN_SetSpritesMaskRegion()
+        /// drawn inside the region set up with <see cref="TLN_SetSpritesMaskRegion"/>
         /// </summary>
         /// <param name="nsprite">Index of the sprite [0, num_sprites - 1]</param>
         /// <param name="enable">Set to true to enable, <see langword="false"/> to disable.</param>
         /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
+        [Obsolete("Use " + nameof(TLN_EnableSpriteFlag) + " instead.")]
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_EnableSpriteMasking(int nsprite, bool enable);
