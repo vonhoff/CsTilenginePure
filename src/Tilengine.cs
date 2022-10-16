@@ -28,7 +28,7 @@
 
 /*
  *****************************************************************************
- * C# Tilengine binding - Up to date to library version 2.9.5 and above.
+ * C# Tilengine binding - Up to date to library version 2.11.0 and above.
  * http://www.tilengine.org
  *****************************************************************************
  */
@@ -480,7 +480,12 @@ namespace Tilengine
             /// <summary>
             /// Sprite won't be drawn inside masked region.
             /// </summary>
-            FLAG_MASKED = 1 << 11
+            FLAG_MASKED = 1 << 11,
+
+            /// <summary>
+            /// Tileset index.
+            /// </summary>
+            FLAG_TILESET = 7 << 8
         }
 
         /// <summary>
@@ -1740,11 +1745,41 @@ namespace Tilengine
         /// <b>Don't delete a tileset which is attached to a layer.</b>
         /// </remarks>
         /// <param name="tileset">Reference to the tileset.</param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DeleteTileset(IntPtr tileset);
 
+        /// <summary>
+        /// Specifies tileset to get from a tilemap.
+        /// </summary>
+        /// <param name="tilemap">Reference to the tilemap.</param>
+        /// <param name="tileset">Reference to the tileset.</param>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
+        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAsAttribute(UnmanagedType.I1)]
+        public static extern bool TLN_SetTilemapTileset(IntPtr tilemap, IntPtr tileset);
+
+        /// <summary>
+        /// Specify tileset index to set (0 - 7).
+        /// </summary>
+        /// <param name="tilemap">Reference to the tilemap.</param>
+        /// <param name="tileset">Reference to the tileset.</param>
+        /// <param name="index">Index to set.</param>
+        /// <returns><see langword="true"/> if successful or <see langword="false"/> if an error occurred.</returns>
+        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAsAttribute(UnmanagedType.I1)]
+        public static extern bool TLN_SetTilemapTileset2(IntPtr tilemap, IntPtr tileset, int index);
+
+        /// <summary>
+        /// Specify tileset index to get (0 - 7).
+        /// </summary>
+        /// <param name="tilemap">Reference to the tilemap.</param>
+        /// <param name="tileset">Reference to the tileset.</param>
+        /// <param name="index">Index to set.</param>
+        /// <returns>Reference to the tileset, or <see cref="IntPtr.Zero"/> if an error occurred.</returns>
+        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr TLN_GetTilemapTileset2(IntPtr tilemap, IntPtr tileset, int index);
         #endregion
 
         #region Tilemap
@@ -2861,6 +2896,14 @@ namespace Tilengine
         [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAsAttribute(UnmanagedType.I1)]
         public static extern bool TLN_DisableSpriteAnimation(int nsprite);
+
+        /// <summary>
+        /// Disables animation for the given sprite.
+        /// </summary>
+        [Obsolete("Use " + nameof(TLN_DisableSpriteAnimation) + " instead.")]
+        [DllImport(NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAsAttribute(UnmanagedType.I1)]
+        public static extern bool TLN_DisableAnimation(int nsprite);
 
         /// <summary>
         /// Pauses animation for the given sprite.
